@@ -39,6 +39,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: postgres backup
-        path: backup.sql gz
+        path: backup.sql.gz
       
       
