@@ -22,7 +22,7 @@ jobs:
     
     - name: Install pg_dump
       run: 
-        sudo apt-get install postgresql-client -y
+        sudo apt-get -y install postgresql-client-17
     - name: Backup database
       env: 
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
