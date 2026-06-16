@@ -22,6 +22,7 @@ jobs:
     
     - name: Install pg_dump
       run: 
+        sudo apt-get update
         sudo apt-get -y install postgresql-client-17
     - name: Backup database
       env: 
