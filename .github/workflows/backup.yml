@@ -5,10 +5,11 @@ name: Backup automation
 
 on:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '55 5 * * *'
+  workflow_dispatch: 
 
 jobs:
-  build:
+  cron-job:
 
     runs-on: ubuntu-latest
 
