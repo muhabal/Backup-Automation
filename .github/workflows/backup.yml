@@ -20,10 +20,11 @@ jobs:
       with:
         python-version: "3.13.2"
     
-    - name: Install pg_dump
-      run: 
-        sudo apt-get update
-        sudo apt-get -y install postgresql-client-17
+    - name: Setup PostgreSQL
+      uses: tj-actions/install-postgresql@v3.2
+      with:
+          postgresql-version: 17
+
     - name: Backup database
       env: 
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
