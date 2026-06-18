@@ -10,6 +10,7 @@ file_path= "backup.sql.gz"
 folder_id=os.environ.get('FOLDER_ID')
 
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
+print(os.environ.get('CLIENT_ID'))
 
 creds = Credentials(
   token=None, refresh_token=os.environ.get('REFRESH_TOKEN'),
