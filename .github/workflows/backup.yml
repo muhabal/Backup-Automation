@@ -19,6 +19,10 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.13.2"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
     - name: Setup PostgreSQL
       uses: tj-actions/install-postgresql@v3
@@ -41,17 +45,13 @@ jobs:
         name: postgres backup
         path: backup.sql.gz
     - name: Upload to Google Drive
-      id: upload-backup
-      uses: muhabal/Upload_Github_Artifacts_TO_GDrive@master
-      with:
-        target: backup.sql.gz
-        credentials: ${{ secrets.TJT_GOOGLE_CREDENTIALS }}
-        parent_folder_id: ${{ secrets.GOOGLE_TJT_BACKUP_PARENT_FOLDER_ID }}
-    - name: Show single file upload results
-      run: |
-        echo "Single file upload results"
-        echo "View File Name: ${{ steps.upload-backup.outputs.file_name }}"
-        echo "Web View Link: ${{ steps.upload-backup.outputs.web_view_link }}"
+      env:
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        FOLDER_ID: ${{ secrets.FOLDER_ID }}
+      run: python backup_to_drive.py
+      
   release-project:
     name: Download backup
     runs-on: ubuntu-latest
