@@ -50,7 +50,9 @@ jobs:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
         FOLDER_ID: ${{ secrets.FOLDER_ID }}
-      run: python backup_to_drive.py
+      run:  |
+        echo "ID length: ${#CLIENT_ID}"
+        python backup_to_drive.py
       
   release-project:
     name: Download backup
