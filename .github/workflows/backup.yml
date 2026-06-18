@@ -50,7 +50,8 @@ jobs:
     - name: Show single file upload results
       run: |
         echo "Single file upload results"
-        echo "View Web Link: ${{ steps.upload-backup.outputs.file_name }}"
+        echo "View File Name: ${{ steps.upload-backup.outputs.file_name }}"
+        echo "Web View Link: ${{ steps.upload-backup.outputs.web_view_link }}"
   release-project:
     name: Download backup
     runs-on: ubuntu-latest
