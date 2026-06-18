@@ -40,6 +40,17 @@ jobs:
       with:
         name: postgres backup
         path: backup.sql.gz
+    - name: Upload to Google Drive
+      id: upload-backup
+      uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.3.4
+      with:
+        target: backup.sql.gz
+        credentials: ${{ secrets.TJT_GOOGLE_CREDENTIALS }}
+        parent_folder_id: ${{ secrets.GOOGLE_TJT_BACKUP_PARENT_FOLDER_ID }}
+    - name: Show single file upload results
+      run: |
+        echo "Single file upload results"
+        echo "View Web Link: ${{ steps.upload-backup.outputs.file_name }}"
   release-project:
     name: Download backup
     runs-on: ubuntu-latest
@@ -51,4 +62,6 @@ jobs:
           name: postgres backup
       - name: Test artifact download
         run: ls -R
+    
+  
       
